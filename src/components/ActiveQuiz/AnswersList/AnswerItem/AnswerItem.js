@@ -1,10 +1,10 @@
-import React from 'react'
-import classes from './AnswerItem.css'
+import React from 'react';
+import classes from './AnswerItem.css';
 
 const AnswerItem = props => {
-    const cls = [classes.AnswerItem]
+    const cls = [classes.AnswerItem];
     if (props.state) {
-        cls.push(classes[props.state])
+        cls.push(classes[props.state]);
     }
     return(
         <li 
@@ -16,4 +16,4 @@ const AnswerItem = props => {
     )
 }
 
-export default AnswerItem
+export default AnswerItem;

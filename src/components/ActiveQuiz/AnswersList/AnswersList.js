@@ -1,6 +1,6 @@
-import React from 'react'
-import classes from './AnswersList.css'
-import AnswerItem from './AnswerItem/AnswerItem'
+import React from 'react';
+import classes from './AnswersList.css';
+import AnswerItem from './AnswerItem/AnswerItem';
 
 const AnswersList = props => (
     <ul className={classes.AnswersList}>
@@ -16,4 +16,4 @@ const AnswersList = props => (
         })}
     </ul>
 )
-export default AnswersList
+export default AnswersList;

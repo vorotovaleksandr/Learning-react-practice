@@ -1,6 +1,6 @@
-import React from 'react'
-import classes from './ActiveQuiz.css'
-import AnswersList from './AnswersList/AnswersList'
+import React from 'react';
+import classes from './ActiveQuiz.css';
+import AnswersList from './AnswersList/AnswersList';
 
 const ActiveQuiz = props =>(
     <div className={classes.ActiveQuiz}>
@@ -19,4 +19,4 @@ const ActiveQuiz = props =>(
     </div>
 )
 
-export default ActiveQuiz
+export default ActiveQuiz;

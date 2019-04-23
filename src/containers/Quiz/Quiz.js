@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import classes from './Quiz.css'
-import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz'
-import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz'
+import React, {Component} from 'react';
+import classes from './Quiz.css';
+import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
+import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz';
 class Quiz extends Component {
     state = {
         results: {},
@@ -55,25 +55,25 @@ class Quiz extends Component {
         const results = this.state.results
         if (question.rightAnswerId === answerId) {
             if (!results[question.id]) {
-                results[question.id] = 'success'
+                results[question.id] = 'success';
             }
             this.setState({
                 answerState:{[answerId]: 'success'},
                 results
-            })
+            });
             const timeout = window.setTimeout(() =>{
                 if (this.isQuizFinished()){
                     this.setState({
                         isFinished: true
-                    })
+                    });
                 }else{
                     this.setState({
                       activeQuestion: this.state.activeQuestion + 1,
                       answerState: null
-                    })
+                    });
                 }
-                window.clearTimeout(timeout)
-            }, 500)  
+                window.clearTimeout(timeout);
+            }, 500);
         } else {
             results[question.id]= 'error'
             this.setState({
@@ -83,7 +83,7 @@ class Quiz extends Component {
         }           
     }
     isQuizFinished() {
-        return this.state.activeQuestion + 1 === this.state.quiz.length
+        return this.state.activeQuestion + 1 === this.state.quiz.length;
     }
     retryHandler = () =>{
         this.setState({
@@ -91,8 +91,8 @@ class Quiz extends Component {
             answerState: null,
             isFinished: false,
             results: {}
-        })
-    }
+        });
+    };
     render() {
         return (
             <div className={classes.Quiz}>            

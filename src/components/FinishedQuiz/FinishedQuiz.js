@@ -1,14 +1,14 @@
-import React from 'react'
-import classes from './FinishedQuiz.css'
-import Button from '../UI/Button/Button'
+import React from 'react';
+import classes from './FinishedQuiz.css';
+import Button from '../UI/Button/Button';
 
 const FinishedQuiz = props => {
     const successCount = Object.keys(props.results).reduce((total,key) => {
         if (props.results[key] === 'success') {
-            total++
+            total++;
         }
-        return total
-    }, 0)
+        return total;
+    }, 0);
     return (
         <div className={classes.FinishedQuiz}>
           <ul>
@@ -28,7 +28,7 @@ const FinishedQuiz = props => {
                   )
               })}          
           </ul>
-          <p>Правильно {successCount} из {props.quiz.length}</p>
+          <p> Правильно {successCount} из {props.quiz.length}</p>
           <div>
               <Button onClick={props.onRetry} type="primary">Repeat</Button>
           </div>
@@ -36,4 +36,4 @@ const FinishedQuiz = props => {
     )
 }
 
-export default FinishedQuiz
+export default FinishedQuiz;
