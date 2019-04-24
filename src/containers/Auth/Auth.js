@@ -119,7 +119,7 @@ class Auth extends Component {
     return (
       <div className={classes.Auth}>
         <div>
-          <h1>Авторизация</h1>
+          <h1>Authorization</h1>
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             { this.renderInputs() }
             <Button
@@ -127,14 +127,14 @@ class Auth extends Component {
               onClick={this.loginHandler}
               disabled={!this.state.isFormValid}
             >
-              Войти
+              Login
             </Button>
             <Button
               type="primary"
               onClick={this.registerHandler}
               disabled={!this.state.isFormValid}
             >
-              Регистрация
+              Registration
             </Button>
 
           </form>
