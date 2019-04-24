@@ -3,6 +3,7 @@ import classes from './Auth.css'
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
 import is from 'is_js'
+import axios from 'axios';
 
 
 
@@ -38,11 +39,34 @@ class Auth extends Component {
     }
   }
 
-  loginHandler = () => {
-
+  loginHandler = async () => {
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value
+    }
+    try{
+     const response = await axios.post('', authData) 
+    } catch (e) {
+      console.log(e)
+    }
   }
-  registerHandler = () => {
+  registerHandler =  () => {
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value
+    }
+    axios({
+      method: 'post',
+      url: 'http://localhost:5000/auth/login',
+      authData
+    })
+    .then((response) =>{ 
+      console.log(response)
     
+     
+    }) .catch((e) =>{
+      console.log(e)
+    })
   }
   submitHandler = event => {
     event.preventDefault()
