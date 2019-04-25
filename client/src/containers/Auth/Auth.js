@@ -44,11 +44,16 @@ class Auth extends Component {
       email: this.state.formControls.email.value,
       password: this.state.formControls.password.value
     }
-    try{
-     const response = await axios.post('', authData) 
-    } catch (e) {
-      console.log(e)
-    }
+    axios({
+      url: 'http://localhost:5000/auth/login',
+      method: 'POST',
+      data: authData
+    }).then(response => {
+     localStorage.setItem('token',response.data.token )          
+     document.cookie = "token" + "=" + response.data.token;
+    }).catch(error => {
+      console.log('error', error);
+    })  
   }
   registerHandler =  () => {
     const authData = {
@@ -56,18 +61,16 @@ class Auth extends Component {
       password: this.state.formControls.password.value
     }
     axios({
-      method: 'post',
-      url: 'http://localhost:5000/auth/login',
-      authData
-    })
-    .then((response) =>{ 
-      console.log(response)
-    
-     
-    }) .catch((e) =>{
-      console.log(e)
-    })
+      url: 'http://localhost:5000/auth/register',
+      method: 'POST',
+      data: authData
+    }).then(response => {
+      console.log('response', response.data);
+    }).catch(error => {
+      console.log('error', error);
+    })   
   }
+  
   submitHandler = event => {
     event.preventDefault()
   }

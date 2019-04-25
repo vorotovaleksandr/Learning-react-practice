@@ -5,25 +5,24 @@ const keys = require('../config/keys')
 const errorHandler = require('../routes/utils/errorHandler')
 
 module.exports.login = async (req, res) => {
-    const candidate = await User.findOne({
+  console.log('req.body', req.body)
+  // const test = JSON.parse(req.body);
+  const candidate = await User.findOne({
     email: req.body.email
   })
   if (candidate) {
     //check password
     const passwordResult = bcrypt.compareSync(req.body.password, candidate.password)
-    if (passwordResult) {
-      // generation session
-      const candidateId = candidate._id
-      req.session.userId = candidateId
+    if (passwordResult) { 
       // generation token
       const token = jwt.sign({
         email: candidate.email,
         userId: candidate._id
     }, keys.jwt ,{expiresIn:60 * 60})
-
       res.status(201).json({
-        token: `Bearer ${token}`
+        token
       })
+      
     } else {
       res.status(401).json({
         message: 'User un authorize.'
@@ -37,27 +36,27 @@ module.exports.login = async (req, res) => {
   }
 }
 module.exports.register = async (req, res) => {
-  console.log('a', res )
+
   //email password
-  // const candidate = await User.findOne({
-  //   email: req.body.email
-  // })
-  // if (candidate) {
-  //   //user use again
-  //   res.status(409).json({
-  //     message: 'such an email is already taken'
-  //   })
-  // } else {
-  //   // created user    
-  //   const user = new User({
-  //     email: req.body.email,
-  //     password: req.body.password
-  //   })  
-  //   try {
-  //     await user.save()
-  //     res.status(201).json(user)
-  //   } catch (e) {
-  //     errorHandler(res, e)
-  //   }
-  // }
+  const candidate = await User.findOne({
+    email: req.body.email
+  })
+  if (candidate) {
+    //user use again
+    res.status(409).json({
+      message: 'such an email is already taken'
+    })
+  } else {
+    // created user    
+    const user = new User({
+      email: req.body.email,
+      password: req.body.password
+    })  
+    try {
+      await user.save()
+      res.status(201).json(user)
+    } catch (e) {
+      errorHandler(res, e)
+    }
+  }
 }

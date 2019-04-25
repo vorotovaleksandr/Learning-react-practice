@@ -1,10 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const MongoStore = require('connect-mongo')(session);
 const authRoutes = require('./routes/auth');
+const checkToken = require('./routes/check');
 const keys = require('./config/keys')
 const app = express()
 
@@ -23,22 +22,14 @@ mongoose.connect(keys.mongoURI, {
   .catch(error => console.log(error))
 
 //dev
-app.use(cookieParser('some text'));
+
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use(bodyParser.json())
-
-// use session
-app.use(session({
-  secret: keys.skeys,
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({
-      url: keys.mongoURI,
-      ttl: 60 * 60
-  })
-}))
+app.use(bodyParser.text())
+app.use(cookieParser('some text'));
 
 app.use('/auth', authRoutes);
+app.use('/checkToken', checkToken);
 module.exports = app
