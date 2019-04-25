@@ -5,6 +5,8 @@ import App from './App';
 import {BrowserRouter} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
+console.log('ERRORR');
+
 const app = (<BrowserRouter>
               <App />
             </BrowserRouter>)

@@ -3,6 +3,7 @@ import classes from './Auth.css'
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
 import is from 'is_js'
+import axios from 'axios';
 
 
 
@@ -38,12 +39,38 @@ class Auth extends Component {
     }
   }
 
-  loginHandler = () => {
-
+  loginHandler = async () => {
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value
+    }
+    axios({
+      url: 'http://localhost:5000/auth/login',
+      method: 'POST',
+      data: authData
+    }).then(response => {
+     localStorage.setItem('token',response.data.token )          
+     document.cookie = "token" + "=" + response.data.token;
+    }).catch(error => {
+      console.log('error', error);
+    })  
   }
-  registerHandler = () => {
-    
+  registerHandler =  () => {
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value
+    }
+    axios({
+      url: 'http://localhost:5000/auth/register',
+      method: 'POST',
+      data: authData
+    }).then(response => {
+      console.log('response', response.data);
+    }).catch(error => {
+      console.log('error', error);
+    })   
   }
+  
   submitHandler = event => {
     event.preventDefault()
   }
@@ -119,7 +146,7 @@ class Auth extends Component {
     return (
       <div className={classes.Auth}>
         <div>
-          <h1>Авторизация</h1>
+          <h1>Authorization</h1>
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             { this.renderInputs() }
             <Button
@@ -127,14 +154,14 @@ class Auth extends Component {
               onClick={this.loginHandler}
               disabled={!this.state.isFormValid}
             >
-              Войти
+              Login
             </Button>
             <Button
               type="primary"
               onClick={this.registerHandler}
               disabled={!this.state.isFormValid}
             >
-              Регистрация
+              Registration
             </Button>
 
           </form>
