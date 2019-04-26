@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const bcrypt = require('bcryptjs')
-const saltWork = 10
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs');
+const saltWork = 10;
 
 const userSchema = new Schema({
   email: {
@@ -13,7 +13,7 @@ const userSchema = new Schema({
     type: String,
     required: true
   }
-})
+});
 userSchema.pre('save', function (next) {
   const user = this;  
   // generate a salt

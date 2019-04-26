@@ -6,17 +6,17 @@ import Drawer from '../../components/Navigation/Drawer/Drawer';
 class Layout extends Component {
     state ={
         menu: false
-    }
+    };
     toggleMenuHandler = () => {
         this.setState({
             menu: !this.state.menu
         })
-    }
+    };
     menuCloseHandler = () => {
         this.setState({
             menu: false
         })
-    }
+    };
     render() {
         return (
           <div className={classes.Layout}>
@@ -35,4 +35,4 @@ class Layout extends Component {
         )
     }
 }
-export default Layout
+export default Layout;

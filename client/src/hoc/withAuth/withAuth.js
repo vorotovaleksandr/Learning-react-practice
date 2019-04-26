@@ -1,23 +1,31 @@
 import React, { Component,Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-
+import getCookie from '../../utils/getCookie/getCookie'
 export default function withAuth(ComponentToProtect) {
   return class extends Component {
-    constructor() {  
+    constructor() { 
+      super(); 
       this.state = {
         loading: true,
         redirect: false,
       };
     }
-    componentDidMount() {  
+    componentDidMount() {
+      const cookie = getCookie('token')
+       
+      console.log('componentDidMount', cookie);
       axios({
-        url: 'http://localhost:5000/checkToken',
-        method: 'POST'                 
+        url: 'http://localhost:5000/checkToken',  
+        method: 'PUT',   
+        data: {
+          token: cookie
+        }           
       }).then(res => {  
         this.setState({ loading: false });
         
       }).catch( () => {
+        console.log('error');
         this.setState({ loading: false, redirect: true });  
       })
     }
@@ -27,7 +35,7 @@ export default function withAuth(ComponentToProtect) {
         return null;
       }
       if (redirect) {
-        return <Redirect to="/login" />;
+        return <Redirect to="/auth" />;
       }
       return (
         <Fragment>

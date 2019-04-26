@@ -1,17 +1,17 @@
 import React, {Component, Fragment} from 'react';
 import classes from './Drawer.css';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 
 const links = [
     {to: '/', label: 'List', exact: true},
     {to: '/auth', label: 'Authorization', exact: false},
     {to: '/quiz-creator', label: 'Create test', exact: false},
-]
+];
 class Drawer extends Component {
     clickHandler = () => {
       this.props.onClose()
-    }
+    };
     renderLinks() {
         return links.map((link, index) => {
             return(
@@ -30,7 +30,7 @@ class Drawer extends Component {
     }
     render() {
       const { isOpen, onClose } = this.props;
-        const cls = [classes.Drawer]
+        const cls = [classes.Drawer];
         if (!isOpen){
             cls.push(classes.close)
         }

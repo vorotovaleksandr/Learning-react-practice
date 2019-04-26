@@ -5,7 +5,7 @@ const Button = props => {
     const cls =[
         classes.Button,
         classes[props.type]
-    ]
+    ];
     return (
         <button
           onClick={props.onClick}
@@ -15,6 +15,6 @@ const Button = props => {
             {props.children}
         </button>
     )
-}
+};
 
-export default Button
+export default Button;

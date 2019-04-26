@@ -1,28 +1,29 @@
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const User = require('../models/user')
-const keys = require('../config/keys')
-const errorHandler = require('../routes/utils/errorHandler')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+const keys = require('../config/keys');
+const errorHandler = require('../routes/utils/errorHandler');
 
 module.exports.login = async (req, res) => {
-  console.log('req.body', req.body)
+  console.log('req.body', req.body);
   // const test = JSON.parse(req.body);
   const candidate = await User.findOne({
     email: req.body.email
   })
   if (candidate) {
     //check password
-    const passwordResult = bcrypt.compareSync(req.body.password, candidate.password)
-    if (passwordResult) { 
+    const passwordResult = bcrypt.compareSync(req.body.password, candidate.password);
+    if (passwordResult) {
       // generation token
       const token = jwt.sign({
         email: candidate.email,
         userId: candidate._id
-    }, keys.jwt ,{expiresIn:60 * 60})
+      }, keys.jwt, {
+        expiresIn: 60 * 60
+      });
       res.status(201).json({
         token
       })
-      
     } else {
       res.status(401).json({
         message: 'User un authorize.'
@@ -34,13 +35,12 @@ module.exports.login = async (req, res) => {
       message: 'user not found'
     })
   }
-}
+};
 module.exports.register = async (req, res) => {
-
   //email password
   const candidate = await User.findOne({
     email: req.body.email
-  })
+  });
   if (candidate) {
     //user use again
     res.status(409).json({
@@ -51,12 +51,12 @@ module.exports.register = async (req, res) => {
     const user = new User({
       email: req.body.email,
       password: req.body.password
-    })  
+    });
     try {
-      await user.save()
+      await user.save();
       res.status(201).json(user)
     } catch (e) {
       errorHandler(res, e)
     }
   }
-}
+};

@@ -21,7 +21,7 @@ const FinishedQuiz = props => {
                       'fa',
                       props.results[quizItem.id] === 'error' ? 'fa-times' : 'fa-check',
                       classes[props.results[quizItem.id]]
-                  ]
+                  ];
                   return (
                       <li key={index}
                       >
@@ -38,6 +38,6 @@ const FinishedQuiz = props => {
           </div>
         </div>
     )
-}
+};
 
 export default FinishedQuiz;

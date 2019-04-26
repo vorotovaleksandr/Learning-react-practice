@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import classes from './QuizList.css'
-import {NavLink} from 'react-router-dom'
+import React, {Component} from 'react';
+import classes from './QuizList.css';
+import {NavLink} from 'react-router-dom';
 export default class QuizList extends Component {
 
   renderQuizes() {
