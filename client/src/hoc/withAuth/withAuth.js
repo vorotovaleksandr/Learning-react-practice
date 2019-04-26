@@ -1,41 +1,44 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import getCookie from '../../utils/getCookie/getCookie'
+
 export default function withAuth(ComponentToProtect) {
   return class extends Component {
-    constructor() { 
-      super(); 
+    constructor() {
+      super();
       this.state = {
         loading: true,
         redirect: false,
       };
     }
+
     componentDidMount() {
-      const cookie = getCookie('token')
-       
+      const cookie = getCookie('token');
+
       console.log('componentDidMount', cookie);
       axios({
-        url: 'http://localhost:5000/checkToken',  
-        method: 'PUT',   
+        url: 'http://localhost:5000/checkToken',
+        method: 'PUT',
         data: {
           token: cookie
-        }           
-      }).then(res => {  
-        this.setState({ loading: false });
-        
-      }).catch( () => {
+        }
+      }).then(res => {
+        this.setState({loading: false});
+
+      }).catch(() => {
         console.log('error');
-        this.setState({ loading: false, redirect: true });  
+        this.setState({loading: false, redirect: true});
       })
     }
-    render() { 
-      const { loading, redirect } = this.state;
+
+    render() {
+      const {loading, redirect} = this.state;
       if (loading) {
         return null;
       }
       if (redirect) {
-        return <Redirect to="/auth" />;
+        return <Redirect to="/auth"/>;
       }
       return (
         <Fragment>

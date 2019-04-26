@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
 
-const withAuth = function (req, res, next) {  
+const withAuth = function (req, res, next) {
   const token =
     req.body.token ||
     req.query.token ||

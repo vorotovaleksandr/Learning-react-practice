@@ -9,7 +9,7 @@ module.exports.login = async (req, res) => {
   // const test = JSON.parse(req.body);
   const candidate = await User.findOne({
     email: req.body.email
-  })
+  });
   if (candidate) {
     //check password
     const passwordResult = bcrypt.compareSync(req.body.password, candidate.password);
