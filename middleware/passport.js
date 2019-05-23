@@ -16,6 +16,7 @@ const withAuth = function (req, res, next) {
       } else {
         //get email other use
         req.email = decoded.email;
+        res.status( 200 ).json(req.email);
         next();
       }
     });

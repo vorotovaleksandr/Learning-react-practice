@@ -19,12 +19,13 @@ export default function withAuth(ComponentToProtect) {
       console.log('componentDidMount', cookie);
       axios({
         url: 'http://localhost:5000/checkToken',
-        method: 'PUT',
+        method: 'POST',
         data: {
           token: cookie
         }
-      }).then(res => {
+      }).then(req => {
         this.setState({loading: false});
+        console.log('componentDidMount', req.data);
 
       }).catch(() => {
         console.log('error');

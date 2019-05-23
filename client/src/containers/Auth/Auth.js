@@ -48,7 +48,7 @@ class Auth extends Component {
       data: authData
     }).then(response => {
       localStorage.setItem('token', response.data.token);
-      document.cookie = "token" + "=" + response.data.token;
+      document.cookie = "token=" + response.data.token;
     }).catch(error => {
       console.log('error', error);
     })
@@ -71,7 +71,7 @@ class Auth extends Component {
   submitHandler = event => {
     event.preventDefault()
   };
-  validateControl(value, validation) {
+  static validateControl(value, validation) {
     if (!validation) {
       return true
     }
@@ -93,7 +93,7 @@ class Auth extends Component {
 
     control.value = event.target.value;
     control.touched = true;
-    control.valid = this.validateControl(control.value, control.validation);
+    control.valid = Auth.validateControl(control.value, control.validation);
 
     formControls[controlName] = control;
 

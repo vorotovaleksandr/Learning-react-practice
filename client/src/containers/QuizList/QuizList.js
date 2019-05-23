@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './QuizList.css';
 import { NavLink } from 'react-router-dom';
+import {Button, ButtonToolbar} from 'react-bootstrap'
 
 export default class QuizList extends Component {
   renderQuizes() {
@@ -21,6 +22,13 @@ export default class QuizList extends Component {
       <div className={classes.QuizList}>
         <div>
           <h1> Quiz List </h1>
+          <ButtonToolbar>
+            <Button href="#">Link</Button>
+            <Button type="submit">Button</Button>
+            <Button as="input" type="button" value="Input" />
+            <Button as="input" type="submit" value="Submit" />
+            <Button as="input" type="reset" value="Reset" />
+          </ButtonToolbar>;
           <ul>
             {this.renderQuizes()}
           </ul>
